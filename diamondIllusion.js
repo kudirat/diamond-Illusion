@@ -64,9 +64,9 @@ function setup() {
    context.restore();
   }
   
-  function drawLine(x, y, height, width, color){ 
+  function drawLine(x, y, height, width, color, Tx){ 
     context.beginPath();
-    context.moveTo(10, 30);
+    moveToTx(10, 30, Tx);
     context.rect(x ,y ,height ,width, color);  
     context.fillStyle = color;  
     context.closePath();
@@ -74,18 +74,13 @@ function setup() {
   }   
       
       
-  
- // drawEmptySquare(200, 200, 75, 75, "#800080");
- // drawLine(-2, 80, 350, 4, "black");
-   
+ 
  var innerDiamondCanvas = mat3.create();
   mat3.fromTranslation(innerDiamondCanvas,[-10,37]);
 //mat3.rotate(Tgreen_to_blue,Tgreen_to_blue,theta1);
   mat3.scale(innerDiamondCanvas,innerDiamondCanvas, [0.75,0.75]);
   drawDiamondFill(context, canvas.width * 0.8, 200, 100, 100, "#B537F2", innerDiamondCanvas);
     
-	
-	//linkage("blue",Tblue_to_canvas);
   //draw middle diamond     
   var blueToInnerDiamond = mat3.create();
  mat3.fromTranslation(blueToInnerDiamond,[-320,-250]);
@@ -148,6 +143,45 @@ function setup() {
   mat3.multiply(pinkDiamondCanvas,gldDiamondCanvas,pinkToGldDiamond);
   drawDiamond(context, canvas.width * 0.8, 200, 100, 100, "#FF2281", pinkDiamondCanvas);
        
+ var topLineToPink = mat3.create();
+  mat3.fromTranslation(topLineToPink,[20,0]);
+  //doesn't work :(
+  mat3.rotate(topLineToPink, topLineToPink, theta1);
+  //mat3.rotate(Tred_to_green,Tred_to_green,phi1);
+  var topLineToCanvas = mat3.create();
+   mat3.multiply(topLineToCanvas,pinkDiamondCanvas,topLineToPink);
+  drawLine(330, 80, 100, 4, "black", topLineToCanvas);
+ 
+ var btmLineToPink = mat3.create();
+  mat3.fromTranslation(btmLineToPink,[20,0]);
+  //doesn't work :(
+  mat3.rotate(btmLineToPink, btmLineToPink, theta1);
+  //mat3.rotate(Tred_to_green,Tred_to_green,phi1);
+  var btmLineToCanvas = mat3.create();
+   mat3.multiply(btmLineToCanvas,pinkDiamondCanvas,btmLineToPink);
+  drawLine(330, 300, 100, 4, "black", topLineToCanvas);   
+      
+  var topLineToGreen = mat3.create();
+  mat3.fromTranslation(topLineToGreen,[-20,0]);
+  //doesn't work :(
+  mat3.rotate(topLineToGreen, topLineToGreen, theta1);
+  //mat3.rotate(Tred_to_green,Tred_to_green,phi1);
+  var topLineToCanvasLft = mat3.create();
+   mat3.multiply(topLineToCanvasLft,greenDiamondCanvas,topLineToGreen);
+  drawLine(20, 80, 70, 4, "black", topLineToCanvasLft);   
+      
+      
+  var btmLineToGreen = mat3.create();
+  mat3.fromTranslation(btmLineToGreen,[-20,0]);
+  //doesn't work :(
+  mat3.rotate(topLineToGreen, topLineToGreen, theta1);
+  //mat3.rotate(Tred_to_green,Tred_to_green,phi1);
+  var btmLineToCanvasLft = mat3.create();
+   mat3.multiply(btmLineToCanvasLft,greenDiamondCanvas,btmLineToGreen);
+  drawLine(20, 300, 70, 4, "black", btmLineToCanvasLft);   
+          
+      
+   
     }
     slider1.addEventListener("input",draw);
    
