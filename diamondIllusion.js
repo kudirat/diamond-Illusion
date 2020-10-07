@@ -3,9 +3,11 @@ function setup() {
     var context = canvas.getContext('2d');
     var slider1 = document.getElementById('slider1');
     slider1.value = -25;
-    
+  
+  
 
     function draw() {
+ 
 	canvas.width = canvas.width;
 	// use the sliders to get the angles
 	var theta1 = slider1.value*0.005*Math.PI;
@@ -174,12 +176,13 @@ function setup() {
   var btmLineToGreen = mat3.create();
   mat3.fromTranslation(btmLineToGreen,[-20,0]);
   //doesn't work :(
-  mat3.rotate(topLineToGreen, topLineToGreen, theta1);
+  
   //mat3.rotate(Tred_to_green,Tred_to_green,phi1);
   var btmLineToCanvasLft = mat3.create();
    mat3.multiply(btmLineToCanvasLft,greenDiamondCanvas,btmLineToGreen);
   drawLine(20, 300, 70, 4, "black", btmLineToCanvasLft);   
-          
+ btmLineToCanvasLft.rotate(btmLineToCanvasLft, btmLineToCanvasLft, theta1);
+  
       
    
     }
