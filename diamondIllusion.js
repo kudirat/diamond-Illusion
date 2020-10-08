@@ -1,8 +1,8 @@
 function setup() {
     var canvas = document.getElementById('myCanvas');
     var context = canvas.getContext('2d');
-   // var slider1 = document.getElementById('slider1');
-    //slider1.value = -25;
+   var slider1 = document.getElementById('slider1');
+    slider1.value = -25;
     var posX = -10;
     var posY = -5;
   
@@ -11,7 +11,7 @@ function setup() {
  
 	canvas.width = canvas.width;
 	
-	//var theta1 = slider1.value*0.005*Math.PI;
+	var theta1 = slider1.value*0.005*Math.PI;
 	
     var stack = [ mat3.create() ];
       
@@ -212,7 +212,7 @@ function setup() {
    
     }
   window.requestAnimationFrame(draw);  
- // slider1.addEventListener("input",draw);
+ slider1.addEventListener("input",draw);
    
     draw();
 }
